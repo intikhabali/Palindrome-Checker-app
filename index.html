@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Assessment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.question {
+    margin-bottom: 30px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+p {
+    margin-top: 10px;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>JavaScript Assessment</h1>
+        <div class="question">
+            <h2>Question 1: Palindrome Check</h2>
+            <p>Write a function to determine if a given string is a palindrome.</p>
+            <textarea id="q1Code" placeholder="Write your code here..."></textarea>
+            <button onclick="checkPalindrome()">Check</button>
+            <p id="q1Result"></p>
+        </div>
+
+        <div class="question">
+            <h2>Question 2: Array Manipulation</h2>
+            <p>Write a function to remove duplicates from an array.</p>
+            <textarea id="q2Code" placeholder="Write your code here..."></textarea>
+            <button onclick="removeDuplicates()">Check</button>
+            <p id="q2Result"></p>
+        </div>
+
+        <div class="question">
+            <h2>Question 3: Number Series</h2>
+            <p>Write a function to generate the Fibonacci series up to a given number of terms.</p>
+            <textarea id="q3Code" placeholder="Write your code here..."></textarea>
+            <button onclick="generateFibonacci()">Check</button>
+            <p id="q3Result"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+<script>
+    // Question 1: Palindrome Check
+function checkPalindrome() {
+    const inputString = document.getElementById('q1Code').value.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const reversedString = inputString.split('').reverse().join('');
+    const resultElement = document.getElementById('q1Result');
+
+    if (inputString === reversedString) {
+        resultElement.textContent = 'It is a palindrome!';
+    } else {
+        resultElement.textContent = 'Not a palindrome.';
+    }
+}
+
+// Question 2: Remove Duplicates from Array
+function removeDuplicates() {
+    const inputArray = JSON.parse(document.getElementById('q2Code').value);
+    const uniqueArray = [...new Set(inputArray)];
+    const resultElement = document.getElementById('q2Result');
+
+    resultElement.textContent = JSON.stringify(uniqueArray);
+}
+
+// Question 3: Generate Fibonacci Series
+function generateFibonacci() {
+    const numTerms = parseInt(document.getElementById('q3Code').value);
+    const resultElement = document.getElementById('q3Result');
+    let fibonacciSeries = [];
+
+    if (!isNaN(numTerms) && numTerms > 0) {
+        let a = 0, b = 1;
+
+        for (let i = 0; i < numTerms; i++) {
+            fibonacciSeries.push(a);
+            [a, b] = [b, a + b];
+        }
+
+        resultElement.textContent = fibonacciSeries.join(', ');
+    } else {
+        resultElement.textContent = 'Invalid input. Please enter a positive number.';
+    }
+}
+
+</script>
+</html>
